@@ -1,38 +1,41 @@
 import React from 'react'
-import { StatusBar, StyleSheet, SafeAreaView, Text, View } from 'react-native';
+import { StyleSheet, FlatList, View } from 'react-native';
 import { Searchbar } from 'react-native-paper';
-import styled from 'styled-components/native';
 
 //components
-import { EventCardExplore } from '../components/EventCardExplore';
+import { SafeArea } from '../../../components/utility/SafeArea';
+import { EventCardExplore } from '../components/event-card/EventCardExplore';
 
-const SafeArea = styled(SafeAreaView)`
-  flex: 1; 
-  ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`}; 
-`
 // check if there is StautusBar.currentHeight. It only exists for android
 
+// import { SafeAreaView, StatusBar } from 'react-native';
+// import styled from 'styled-components/native'
 
-export const ExploreScreen = () => {
+// const SafeArea = styled(SafeAreaView)`
+//   ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`}; 
+// `
+
+ export const ExploreScreen = () => {
     return (
-        <SafeArea style={styles.container}>
+        <SafeArea>
             <View style={styles.search}>
                 <Searchbar/>
             </View>
-            <View style={styles.list}>
-                <EventCardExplore />
-            </View>
+            <FlatList 
+              data={[{name: 1}, {name: 2}]} 
+              renderItem={() => <EventCardExplore />}
+              keyExtractor={(item) => item.name} // extract a key from the given data
+              contentContainerStyle={{padding: 0, marginBottom: 10}} // apply style to each child
+              />
         </SafeArea>
     );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1, 
-    marginTop: StatusBar.currentHeight
-  },
+
   search: {
     padding: 0, 
+    marginBottom: 30,
     backgroundColor: 'green'
   },
   list: {
