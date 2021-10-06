@@ -9,12 +9,13 @@ import { Text }  from '../../../../components/typography/Text';
 import { UserAvatar } from '../../../../components/avatar/Avatar';
 import { Row } from '../../../../components/row/Row'
 
-//styles
+//styles 
 import { EventCard, EventCover, InfoWrapper } from "./event-card-explore.styles";
 
 
 // import { SvgXml } from 'react-native-svg';
 // import priceIcon from '../../../../assets/priceIcon.svg';
+
 
 
 export const EventCardExplore = ({ event = {} }) => {
