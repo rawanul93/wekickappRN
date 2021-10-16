@@ -1,50 +1,72 @@
-import React from 'react'
-import { StatusBar, StyleSheet, SafeAreaView, Text, View } from 'react-native';
-import { Searchbar } from 'react-native-paper';
-import styled from 'styled-components/native';
+import React from "react";
+import {
+  StyleSheet,
+  FlatList as EventList,
+  View,
+  Pressable,
+  TouchableOpacity
+} from "react-native";
+import { Searchbar } from "react-native-paper";
 
 //components
-import { EventCardExplore } from '../components/EventCardExplore';
+import { SafeArea } from "../../../components/utility/SafeArea";
+import { EventCardExplore } from "../../Events/components/event-card-explore/EventCardExplore";
 
-const SafeArea = styled(SafeAreaView)`
-  flex: 1; 
-  ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`}; 
-`
 // check if there is StautusBar.currentHeight. It only exists for android
 
+// import { SafeAreaView, StatusBar } from 'react-native';
+// import styled from 'styled-components/native'
 
-export const ExploreScreen = () => {
-    return (
-        <SafeArea style={styles.container}>
-            <View style={styles.search}>
-                <Searchbar/>
-            </View>
-            <View style={styles.list}>
-                <EventCardExplore />
-            </View>
-        </SafeArea>
-    );
-}
+// const SafeArea = styled(SafeAreaView)`
+//   ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
+// `
+
+export const ExploreScreen = ({ navigation }) => {
+  return (
+    <SafeArea>
+      <View style={styles.search}>
+        <Searchbar />
+      </View>
+      <EventList
+        data={[{ name: 1, id: 0 }, { name: 2, id: 1 }]}
+        renderItem={({ item }) => (
+          <Pressable
+            onPress={() =>
+              navigation.navigate('EventDetail', {
+                screen: 'EventDetail',
+                params: {
+                  itemId: 86,
+                  otherParam: 'anything you want here',
+                }
+              })
+  
+            }
+          >
+            <EventCardExplore />
+          </Pressable>
+        )}
+        keyExtractor={(item) => item.name} // extract a key from the given data
+        contentContainerStyle={{ padding: 0, marginBottom: 10 }} // apply style to each child
+      />
+    </SafeArea>
+  );
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1, 
-    marginTop: StatusBar.currentHeight
-  },
   search: {
-    padding: 0, 
-    backgroundColor: 'green'
+    padding: 0,
+    marginBottom: 30,
+    backgroundColor: "green"
   },
   list: {
-    flex: 1, 
+    flex: 1,
     padding: 0,
-    backgroundColor: '#f1f1f1'
+    backgroundColor: "#f1f1f1"
   },
   searchText: {
-    color: '#2e2e2e'
+    color: "#2e2e2e"
   },
   searchbar: {
     borderRadius: 0
   }
-
 });
