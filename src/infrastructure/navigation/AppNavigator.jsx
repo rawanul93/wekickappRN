@@ -3,16 +3,10 @@ import { Text } from "react-native";
 
 // navigation
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
-import { ExploreNavigator } from "./ExploreNavigator";
-
-// icons
-import { NavIcon } from "../../components/svgs/NavIcon";
-import { LogoTitle } from "../../components/branding/LogoTitle";
-import { EventDetailScreen } from "../../features/Events/screens/EventDetailScreen";
 import { createNativeStackNavigator, TransitionPresets } from '@react-navigation/native-stack'
-import { EventNavigator } from "./EventNavigator";
+
+import { BottomNavigation } from './BottomNavigation';
+import { EventNavigator } from './EventNavigator';
 
 // const Create = () => <Text>Create</Text>;
 // const Schedule = () => <Text>Schedule</Text>;
@@ -20,12 +14,20 @@ import { EventNavigator } from "./EventNavigator";
 
 // const Tab = createBottomTabNavigator();
 
+const AppStack = createNativeStackNavigator();  
 
 export const AppNavigator = () => {
   return (
-    <NavigationContainer>
-      <ExploreNavigator/>
-      <EventNavigator/>
-    </NavigationContainer>
+       <AppStack.Navigator >
+            <AppStack.Screen 
+                name='Main-Navigation'
+                component={BottomNavigation}
+                options={{ headerShown: false }} 
+            />
+            <AppStack.Screen 
+                name='EventDetail'
+                component={EventNavigator}
+            />
+        </AppStack.Navigator>
   );
 };

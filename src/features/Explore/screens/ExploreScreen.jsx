@@ -33,9 +33,13 @@ export const ExploreScreen = ({ navigation }) => {
           <Pressable
             onPress={() =>
               navigation.navigate('EventDetail', {
-                itemId: 86,
-                otherParam: 'anything you want here',
+                screen: 'EventDetail',
+                params: {
+                  itemId: 86,
+                  otherParam: 'anything you want here',
+                }
               })
+  
             }
           >
             <EventCardExplore />
